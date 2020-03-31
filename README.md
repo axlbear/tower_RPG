@@ -27,3 +27,6 @@
 - "Veleno"
 - "Dekon"
 - "Dionus"
+- "Bradok"
+- "Profeta"
+- "Zman"
