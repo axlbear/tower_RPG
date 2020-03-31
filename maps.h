@@ -1,4 +1,4 @@
-int map[20][81]; // The only Multidimensional Array of all game, it will change constantly
+int map[20][101]; // The only Multidimensional Array of all game, it will change constantly
 int x, y; // Start Position of the Player
 int *vert = &y;
 int *horz = &x;
@@ -6,13 +6,13 @@ int *horz = &x;
 int tower_level;
 int *tower = &tower_level;
 
-int printMap (int a[20][81])
+int printMap (int a[20][101])
 {
     clear();
 
     for (int y=0; y<20; y++)
     {
-        for (int x=0; x<81; x++)
+        for (int x=0; x<101; x++)
         {
             printf("%c", a[y][x]);
         }
@@ -20,7 +20,7 @@ int printMap (int a[20][81])
     }
 }
 
-int mapCreate01(int a[20][81])
+int mapCreate01(int a[20][101])
 {
     *vert = 17;
     *horz = 2;
@@ -31,27 +31,27 @@ int mapCreate01(int a[20][81])
 
     for (int y=0; y<20; y++) //preenche com 176 todas as posições
     {
-        for (int x=0; x<81; x++)
+        for (int x=0; x<101; x++)
         {
             a[y][x] = FLOOR;
         }
     }
 
-    a[0][0] = U_L_CORNER;   //canto superior esquerdo
-    a[0][80] = U_R_CORNER;  //canto superior direito
-    a[19][0] = L_L_CORNER;  //canto inferior esquerdo
-    a[19][80] = L_R_CORNER; //canto inferior direito
+    a[0][0] = U_L_CORNER;   
+    a[0][100] = U_R_CORNER; 
+    a[19][0] = L_L_CORNER;  
+    a[19][100] = L_R_CORNER; 
 
     for (int y=1; y<19; y++)
     {
-        a[y][0] = V_WALL;  //parede vertical esquerda
-        a[y][80] = V_WALL; //parede vertical direita
+        a[y][0] = V_WALL;
+        a[y][100] = V_WALL;
     }
 
-    for (int x=1; x<80; x++)
+    for (int x=1; x<100; x++)
     {
-        a[0][x] = H_WALL;  //parede horizontal superior
-        a[19][x] = H_WALL; //parede horizontal inferior
+        a[0][x] = H_WALL;
+        a[19][x] = H_WALL;
     }
 
     a[7][1] = V_WALL_2 ;
