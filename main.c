@@ -54,7 +54,6 @@ int main (void)
             case KB_ENTER :      // All the #define are located inside maps.h
             {
                 mapCreate01(map);
-                movement(map);
             }
 
             case KB_ESC :

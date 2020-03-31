@@ -6,11 +6,28 @@ int *horz = &x;
 int tower_level;
 int *tower = &tower_level;
 
+int printMap (int a[20][81])
+{
+    clear();
+
+    for (int y=0; y<20; y++)
+    {
+        for (int x=0; x<81; x++)
+        {
+            printf("%c", a[y][x]);
+        }
+        printf("\n");
+    }
+}
+
 int mapCreate01(int a[20][81])
 {
     *vert = 17;
     *horz = 2;
     *tower = 1;
+    int meeps_event_01;
+
+    // MAP
 
     for (int y=0; y<20; y++) //preenche com 176 todas as posições
     {
@@ -61,24 +78,7 @@ int mapCreate01(int a[20][81])
     a[1][9] = H_WALL_2 ;
 
     a[2][2] = MEEPS;
-}
 
-int printMap (int a[20][81])
-{
-    clear();
-
-    for (int y=0; y<20; y++)
-    {
-        for (int x=0; x<81; x++)
-        {
-            printf("%c", a[y][x]);
-        }
-        printf("\n");
-    }
-}
-
-int movement (int a[20][81])
-{
     do
     {
         a[*vert][*horz] = PLAYER;
@@ -181,6 +181,7 @@ int movement (int a[20][81])
                 if (a[*vert - 1][*horz] == MEEPS || a[*vert + 1][*horz] == MEEPS || a[*vert][*horz - 1] == MEEPS || a[*vert][*horz + 1] == MEEPS)
                 {
                     meeps_01();
+                    a[2][2] = FLOOR;
                     break;
                 }
             }
