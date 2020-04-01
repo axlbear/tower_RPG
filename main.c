@@ -11,9 +11,11 @@
 
 int main (void)
 {
+    char map[20][101]; // The only Multidimensional Array of all game, it will change constantly
+
     clear_s();
 
-    int logo[16][38] = {{178,178,178,178,178,178,177,178,178,178,178,178,178,177,178,178,176,176,176,176,177,178,178,177,178,178,178,178,178,178,177,178,178,178,178,178,178,},
+    char logo[16][38] = {{178,178,178,178,178,178,177,178,178,178,178,178,178,177,178,178,176,176,176,176,177,178,178,177,178,178,178,178,178,178,177,178,178,178,178,178,178,},
                     {178,178,178,178,178,178,177,178,178,178,178,178,178,177,178,178,176,176,176,176,177,178,178,177,178,178,178,178,178,178,177,178,178,178,178,178,178,},
                     {178,178,178,178,178,178,177,178,178,178,178,178,178,177,178,178,176,176,176,176,177,178,178,177,178,178,178,178,178,178,177,178,178,178,178,178,178,},
                     {178,178,178,178,178,178,177,178,178,178,178,178,178,177,178,178,176,176,176,176,177,178,178,177,178,178,178,178,178,178,177,178,178,178,178,178,178,},
@@ -47,13 +49,13 @@ int main (void)
 
     do
     {    
-        int KB_INPUT = _getch(); // _getch() will identify its ASCII value as an Integer and send it to KB_INPUT
+        char KB_INPUT = _getch(); // _getch() will identify its ASCII value as an Character and send it to KB_INPUT
 
         switch(KB_INPUT)         // with #define, I can turn those ASCII values into readable references
         {
-            case KB_ENTER :      // All the #define are located inside maps.h
+            case KB_ENTER :      // All the #define are located inside define.h
             {
-                mapCreate01(map);
+                mapCreate01(&map);
             }
 
             case KB_ESC :

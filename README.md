@@ -9,7 +9,7 @@
 - [x] ASCII Visuals - March 29th, 2020
 - [x] Movement / Colision - March 30th, 2020
 - [x] Interactive Menus - March 31th, 2020
-- [ ] Map Creation and Level Design
+- [x] Map Creation and Level Design - March 31th, 2020
 - [ ] Invetory
 - [ ] Combat
 - [ ] Dice Rolls
@@ -20,10 +20,10 @@
 - [ ] Alternative Endings
 
 ## Special Thanks:
-- "GrumpyLizardy" for dealing with all my coding shenanigans.
+- [Shaman](https://github.com/Pobre) for dealing with all my coding shenanigans.
 - "DooMage"
 - "ShadeNoah"
-- "Mdroid"
+- [Mdroid](https://github.com/Medroid)
 - "Veleno"
 - "Dekon"
 - "Dionus"

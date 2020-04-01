@@ -1,13 +1,6 @@
-int map[20][101]; // The only Multidimensional Array of all game, it will change constantly
-int x, y; // Start Position of the Player
-int *vert = &y;
-int *horz = &x;
-
-int tower_level;
-int *tower = &tower_level;
-
-int printMap (int a[20][101])
+void printMap (char *a[20][101])
 {
+
     clear();
 
     for (int y=0; y<20; y++)
@@ -20,8 +13,15 @@ int printMap (int a[20][101])
     }
 }
 
-int mapCreate01(int a[20][101])
+void mapCreate01(char *a[20][101])
 {
+    int a, b; // Start Position of the Player
+    int *vert = &a;
+    int *horz = &b;
+
+    int tower_level;
+    int *tower = &tower_level;
+
     *vert = 17;
     *horz = 2;
     *tower = 1;
@@ -89,7 +89,7 @@ int mapCreate01(int a[20][101])
         printf("| Use SPACE BAR to interact\n");
         printf("| ESC to Exit\n");
 
-        int KB_INPUT = _getch();
+        char KB_INPUT = _getch();
 
         switch(KB_INPUT)
         {
