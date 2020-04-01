@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <stdbool.h>
+#include <time.h>
 #include <windows.h>
 #include "define.h"   // All the #define commands
 #include "battle.h"   // Battle Functions and most of the Encounters
@@ -11,8 +12,10 @@
 
 int main (void)
 {
-    int map[20][101]; // The only Multidimensional Array of all game, it will change constantly
+    int map[20][61]; // The only Multidimensional Array of all game, it will change constantly
     //int *p_map = &map[0][0];
+
+    //srand(time(NULL));
 
     clear_s();
 
@@ -56,6 +59,7 @@ int main (void)
         {
             case KB_ENTER :      // All the #define are located inside define.h
             {
+                clear_s();
                 mapCreate01(map);
             }
 
@@ -65,9 +69,9 @@ int main (void)
             }
         }
 
-        Sleep(150);
-
      } while (1);
+
+     Sleep(250);
 
     return 0;
 }

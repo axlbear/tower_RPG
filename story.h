@@ -100,6 +100,8 @@ int meeps_01 (void)
                 printf("| Press ANY key to continue.\n");         
 
                 _getch();
+                
+                clear_s();
 
                 return 0;
                 break;

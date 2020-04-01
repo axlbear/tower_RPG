@@ -10,6 +10,7 @@
 - [x] Movement / Colision - March 30th, 2020
 - [x] Interactive Menus - March 31th, 2020
 - [x] Map Creation and Level Design - March 31th, 2020
+- [x] Pseudo AI for enemy movements (Now the Player can be stealthy and avoid combat)
 - [ ] Invetory
 - [ ] Combat
 - [ ] Dice Rolls
@@ -20,7 +21,8 @@
 - [ ] Alternative Endings
 
 ## Special Thanks:
-- [Shaman](https://github.com/Pobre) for dealing with all my coding shenanigans.
+- [Shaman](https://github.com/Pobre)
+- [fcrozetta](https://github.com/fcrozetta)
 - "DooMage"
 - "ShadeNoah"
 - [Mdroid](https://github.com/Medroid)
