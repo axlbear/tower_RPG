@@ -1,8 +1,8 @@
-#include "stdio.h"
-#include "stdlib.h"
-#include "conio.h"
-#include "stdbool.h"
-#include "windows.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <stdbool.h>
+#include <windows.h>
 #include "define.h"   // All the #define commands
 #include "battle.h"   // Battle Functions and most of the Encounters
 #include "story.h"    // Storyline, Events and Endings
@@ -11,7 +11,8 @@
 
 int main (void)
 {
-    char map[20][101]; // The only Multidimensional Array of all game, it will change constantly
+    int map[20][101]; // The only Multidimensional Array of all game, it will change constantly
+    //int *p_map = &map[0][0];
 
     clear_s();
 
@@ -49,13 +50,13 @@ int main (void)
 
     do
     {    
-        char KB_INPUT = _getch(); // _getch() will identify its ASCII value as an Character and send it to KB_INPUT
+        int KB_INPUT = _getch(); // _getch() will identify its ASCII value as an Integer and send it to KB_INPUT
 
         switch(KB_INPUT)         // with #define, I can turn those ASCII values into readable references
         {
             case KB_ENTER :      // All the #define are located inside define.h
             {
-                mapCreate01(&map);
+                mapCreate01(map);
             }
 
             case KB_ESC :
@@ -63,7 +64,10 @@ int main (void)
                 exit(1);
             }
         }
-    } while (1);
+
+        Sleep(150);
+
+     } while (1);
 
     return 0;
 }

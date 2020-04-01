@@ -1,4 +1,4 @@
-void meeps_01 (void)
+int meeps_01 (void)
 {
     do
     {
@@ -16,7 +16,7 @@ void meeps_01 (void)
     printf("| 4 - \"Could you come along with me?\"\n");
     printf("| 5 - (End Conversation)\n");
 
-    char OPTION = _getch();
+    int OPTION = _getch();
 
     switch (OPTION)
         {

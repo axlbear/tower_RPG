@@ -1,6 +1,5 @@
-void printMap (char *a[20][101])
+void printMap (int a[20][101])
 {
-
     clear();
 
     for (int y=0; y<20; y++)
@@ -13,18 +12,15 @@ void printMap (char *a[20][101])
     }
 }
 
-void mapCreate01(char *a[20][101])
+void mapCreate01(int a[20][101])
 {
-    int a, b; // Start Position of the Player
-    int *vert = &a;
-    int *horz = &b;
-
-    int tower_level;
-    int *tower = &tower_level;
+    int vertical, horizontal; // Start Position of the Player
+    int *vert = &vertical;
+    int *horz = &horizontal;
 
     *vert = 17;
     *horz = 2;
-    *tower = 1;
+
     int meeps_event_01;
 
     // MAP
@@ -79,6 +75,10 @@ void mapCreate01(char *a[20][101])
 
     a[2][2] = MEEPS;
 
+    a[2][5] = WEAPON;
+
+    // MOVIMENT - COLISION
+
     do
     {
         a[*vert][*horz] = PLAYER;
@@ -89,7 +89,7 @@ void mapCreate01(char *a[20][101])
         printf("| Use SPACE BAR to interact\n");
         printf("| ESC to Exit\n");
 
-        char KB_INPUT = _getch();
+        int KB_INPUT = _getch();
 
         switch(KB_INPUT)
         {
