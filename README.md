@@ -13,6 +13,7 @@ This project is written entirely in C, without the use of External Libraries.
 
 ## Developed by:
 - Alex "Axl_Bear" Marzani - Code, Level Design, Original Idea for the Project
+- [EMAIL](alexmarzanimotta@hotmail.com)
 
 ## Progress:
 
@@ -22,7 +23,7 @@ This project is written entirely in C, without the use of External Libraries.
 - [x] Level Design - March 31th, 2020
 - [x] Pseudo AI for enemy movements (Now the Player can be stealthy and avoid combat) - April 1st, 2020
 - [x] Map Creation tool - April 1st, 2020
-- [ ] Invetory
+- [x] Invetory - April 3rd, 2020
 - [ ] Combat
 - [ ] Dice Rolls
 - [ ] Character's sheet
@@ -33,7 +34,7 @@ This project is written entirely in C, without the use of External Libraries.
 
 ## Special Thanks for my friends that helped and supported my during this project:
 - [Shaman](https://github.com/Pobre) - Bug Checking and helping me out with all my coding shenanigans.
-- [fcrozetta](https://github.com/fcrozetta)
+- [fcrozetta](https://github.com/fcrozetta) - helping me out with all my coding shenanigans too.
 - [Zulian](https://github.com/zulian-dev)
 - "DooMage"
 - "ShadeNoah"
