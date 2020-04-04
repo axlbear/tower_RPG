@@ -10,7 +10,22 @@
 * Y - 1 | X - 1  = UPPER LEFT DIAGONAL
 */
 
-void combatColision (int a[20][61], int *y, int *x, int *e_y, int *e_x, int *p_health, int *e_health, int *atk, int *e_atk) // NEED TO BE REVIEWED
+void checkEnemy_Goblin (int a[20][61], int *e_health, int *e_y, int *e_x) // DONE
+{
+    if (*e_health >= 0)
+    {
+        a[*e_y][*e_x] = GOBLIN;
+    }
+
+    else
+    {
+        *e_x = 0;
+        *e_y = 0;
+        a[*e_y][*e_x] = WALL;
+    }
+}
+
+void combatColision (int a[20][61], int *y, int *x, int *e_y, int *e_x, int *p_health, int *e_health, int *atk, int *e_atk) // DONE
 {
     if (*y == *e_y     && *x == *e_x     || // MIDDLE
         *y - 1 == *e_y && *x == *e_x     || // UP
@@ -22,13 +37,8 @@ void combatColision (int a[20][61], int *y, int *x, int *e_y, int *e_x, int *p_h
         *y == *e_y     && *x - 1 == *e_x || // LEFT
         *y - 1 == *e_y && *x - 1 == *e_x)   // UPPER LEFT DIAGONAL
     {
-        printf("| You have been caught!\n| Prepare Yourself.\n");
-
         *p_health -= *e_atk;
         *e_health -= *atk;
-
-        _getch();
-        clear_s();
     }
 }
 
@@ -36,6 +46,7 @@ void keyPickup (int a[20][61], int *y, int *x, int *k) // DONE
 {
     if (a[*y - 1][*x] == KEY) // UP
     {
+        clear();
         printf("You got a key!");
         *k += 1;
         a[*y - 1][*x] = FLOOR;
@@ -45,6 +56,7 @@ void keyPickup (int a[20][61], int *y, int *x, int *k) // DONE
         
     else if (a[*y][*x + 1] == KEY) // RIGHT
     {
+        clear();
         printf("You got a key!");
         *k += 1;
         a[*y][*x + 1] = FLOOR;
@@ -54,6 +66,7 @@ void keyPickup (int a[20][61], int *y, int *x, int *k) // DONE
     
     else if (a[*y + 1][*x] == KEY) // DOWN
     {
+        clear();
         printf("You got a key!");
         *k += 1;
         a[*y + 1][*x] = FLOOR;
@@ -63,6 +76,7 @@ void keyPickup (int a[20][61], int *y, int *x, int *k) // DONE
     
     else if (a[*y][*x - 1] == KEY) // LEFT
     {
+        clear();
         printf("You got a key!");
         *k += 1;
         a[*y][*x - 1] = FLOOR;
@@ -77,6 +91,7 @@ void checkDoor (int a[20][61], int *y, int *x, int *k) // DONE
     {
         if (*k > 0)
         {
+            clear();
             printf("This Door is now open");
             *k -= 1;
             a[*y - 1][*x] = FLOOR;
@@ -86,6 +101,7 @@ void checkDoor (int a[20][61], int *y, int *x, int *k) // DONE
 
         else
         {
+            clear();
             printf("You don't have a key.");
             _getch();
             clear_s();
@@ -96,6 +112,7 @@ void checkDoor (int a[20][61], int *y, int *x, int *k) // DONE
     {
         if (*k > 0)
         {
+            clear();
             printf("This Door is now open");
             *k -= 1;
             a[*y][*x + 1] = FLOOR;
@@ -105,6 +122,7 @@ void checkDoor (int a[20][61], int *y, int *x, int *k) // DONE
 
         else
         {
+            clear();
             printf("You don't have a key.");
             _getch();
             clear_s();
@@ -115,6 +133,7 @@ void checkDoor (int a[20][61], int *y, int *x, int *k) // DONE
     {
         if (*k > 0)
         {
+            clear();
             printf("This Door is now open");
             *k -= 1;
             a[*y + 1][*x] = FLOOR;
@@ -124,6 +143,7 @@ void checkDoor (int a[20][61], int *y, int *x, int *k) // DONE
 
         else
         {
+            clear();
             printf("You don't have a key.");
             _getch();
             clear_s();
@@ -134,6 +154,7 @@ void checkDoor (int a[20][61], int *y, int *x, int *k) // DONE
     {
         if (*k > 0)
         {
+            clear();
             printf("This Door is now open");
             *k -= 1;
             a[*y][*x - 1] = FLOOR;
@@ -143,6 +164,7 @@ void checkDoor (int a[20][61], int *y, int *x, int *k) // DONE
 
         else
         {
+            clear();
             printf("You don't have a key.");
             _getch();
             clear_s();
@@ -152,65 +174,34 @@ void checkDoor (int a[20][61], int *y, int *x, int *k) // DONE
 
 void leverPull (int a[20][61], int *y, int *x)  // DONE
 {
+    //map01[16][11] = LEVER_OFF;
+    //map01[14][32] = LEVER_OFF;
+    //map01[14][45] = LEVER_OFF;
+    //map01[3][16] = BARRIER;
+    //map01[13][47] = BARRIER;
+    //map01[4][52] = BARRIER;
+
     if (a[*y - 1][*x] == LEVER_OFF) // UP
     {
-        printf("You have pulled a lever.\nA barrier is now lifted!\n");
-        if (*y - 1 == 17 && *x == 11)
+        if (*y - 1 == 16 && *x == 11)
         {
+            a[16][11] = LEVER_ON;
             a[3][16] = FLOOR;
-            a[17][11] = LEVER_ON;                        
-        }
 
-        else if (*y - 1 == 15 && *x == 31)
+        }
+        else if (*y - 1 == 14 && *x == 32)
         {
+            a[14][32] = LEVER_ON;
             a[13][47] = FLOOR;
-            a[15][31] = LEVER_ON;
         }
-
-        else if (*y - 1 == 15 && *x == 45)
+        else if (*y - 1 == 14 && *x == 45)
         {
+            a[14][45] = LEVER_ON;
             a[4][52] = FLOOR;
-            a[15][45] = LEVER_ON;
         }
 
-        _getch();
-        clear_s();
-    }
-
-    else if (a[*y][*x + 1] == LEVER_OFF) // RIGHT
-    {
-        printf("You have pulled a lever.\nA barrier is now lifted!\n");
-        _getch();
-        clear_s();
-    }
-
-    else if (a[*y + 1][*x] == LEVER_OFF) // DOWN
-    {
-        printf("You have pulled a lever.\nA barrier is now lifted!\n");
-        _getch();
-        clear_s();
-    }
-
-    else if (a[*y][*x - 1] == LEVER_OFF) // LEFT
-    {
-        printf("You have pulled a lever.\nA barrier is now lifted!\n");
-        if (*y == 17 && *x - 1 == 11)
-        {
-            a[3][16] = FLOOR;
-            a[17][11] = LEVER_ON;                        
-        }
-
-        else if (*y == 15 && *x - 1 == 32)
-        {
-            a[13][47] = FLOOR;
-            a[15][32] = LEVER_ON;
-        }
-
-        else if (*y == 15 && *x - 1 == 45)
-        {
-            a[4][52] = FLOOR;
-            a[15][45] = LEVER_ON;
-        }
+        clear();
+        printf("You pulled a lever. A barrier has been lifted.");
         _getch();
         clear_s();
     }
@@ -331,9 +322,9 @@ void mapCreate01(void)
     map01[3][16] = BARRIER;
     map01[13][47] = BARRIER;
     map01[4][52] = BARRIER;
-    map01[17][11] = LEVER_OFF;
-    map01[15][32] = LEVER_OFF;
-    map01[15][45] = LEVER_OFF;
+    map01[16][11] = LEVER_OFF;
+    map01[14][32] = LEVER_OFF;
+    map01[14][45] = LEVER_OFF;
     map01[7][1] = KEY;
     map01[18][17] = KEY;
     map01[2][38] = KEY;
@@ -344,43 +335,84 @@ void mapCreate01(void)
     int vertical = 17, horizontal = 2; // Start Position of the Player
 
     int enemy_vertical_01 = 10, enemy_horizontal_01 = 8;  // Enemy Position 01
+    int enemy_health_01 = 2;
+    int enemy_attack_01 = 1;
     
     int enemy_vertical_02 = 10, enemy_horizontal_02 = 13; // Enemy Position 02
+    int enemy_health_02 = 2;
+    int enemy_attack_02 = 1;
     
     int enemy_vertical_03 = 13, enemy_horizontal_03 = 23; // Enemy Position 03
+    int enemy_health_03 = 2;
+    int enemy_attack_03 = 1;
     
     int enemy_vertical_04 = 7, enemy_horizontal_04 = 36;  // Enemy Position 04
+    int enemy_health_04 = 2;
+    int enemy_attack_04 = 1;
     
     int enemy_vertical_05 = 5, enemy_horizontal_05 = 42;  // Enemy Position 05
+    int enemy_health_05 = 2;
+    int enemy_attack_05 = 1;
     
     int enemy_vertical_06 = 11, enemy_horizontal_06 = 55; // Enemy Position 06
+    int enemy_health_06 = 2;
+    int enemy_attack_06 = 1;
     
     // VARIABLES
 
     int key = 0;
-    int health = 10;
+    int health = 100;
     int attack = 1;
-    int level = 1;
-    int exp = 0;
-    int next_level = 5;
-
-    /*
-    |* 1 - Need to fix the enemies' positions
-    |* 2 - Combat and EXP
-    |* Right now all doors, keys and levers works fine.
-    */
+    int tower_level = 1;
 
     do
     {
+        if (health <= 0)
+        {
+            clear_s();
+            printf("| GAME OVER");
+            _getch();
+            exit(1);
+        }
+
         map01[vertical][horizontal] = PLAYER;
+
+        checkEnemy_Goblin(map01, &enemy_health_01, &enemy_vertical_01, &enemy_horizontal_01);
+        Sleep(1);
+        checkEnemy_Goblin(map01, &enemy_health_02, &enemy_vertical_02, &enemy_horizontal_02);
+        Sleep(1);
+        checkEnemy_Goblin(map01, &enemy_health_03, &enemy_vertical_03, &enemy_horizontal_03);
+        Sleep(1);
+        checkEnemy_Goblin(map01, &enemy_health_04, &enemy_vertical_04, &enemy_horizontal_04);
+        Sleep(1);
+        checkEnemy_Goblin(map01, &enemy_health_05, &enemy_vertical_05, &enemy_horizontal_05);
+        Sleep(1);
+        checkEnemy_Goblin(map01, &enemy_health_06, &enemy_vertical_06, &enemy_horizontal_06);
+        Sleep(1);
+
+        // PRINT MAP
 
         printMap(map01);
 
-        printf("| HEALTH: %d | ATK: %d | LEVEL: %d\n", health, attack, level);
-        printf("| EXP: %d | NEXT LEVEL: %d | KEYS: %d\n", exp, next_level, key);
+        printf("| HEALTH: %d \n| ATK: %d \n| TOWER LEVEL: %d \n| KEYS: %d \n", health, attack, tower_level, key);
         printf("| Press TAB for the Inventory\n");
 
-        // PLAYER
+        // ENEMY MOVEMENT
+
+        enemyMovement(map01, &enemy_vertical_01, &enemy_horizontal_01);
+        Sleep(1);
+        enemyMovement(map01, &enemy_vertical_02, &enemy_horizontal_02);
+        Sleep(1);
+        enemyMovement(map01, &enemy_vertical_03, &enemy_horizontal_03);
+        Sleep(1);
+        enemyMovement(map01, &enemy_vertical_04, &enemy_horizontal_04);
+        Sleep(1);
+        enemyMovement(map01, &enemy_vertical_05, &enemy_horizontal_05);
+        Sleep(1);
+        enemyMovement(map01, &enemy_vertical_06, &enemy_horizontal_06);
+        Sleep(1);
+
+        // PLAYER MOVEMENT
 
         int KB_INPUT = _getch();
 
@@ -485,7 +517,20 @@ void mapCreate01(void)
             default : break;
         }
 
-        Sleep(50);
+        combatColision(map01, &vertical, &horizontal, &enemy_vertical_01, &enemy_horizontal_01, &health, &enemy_health_01, &attack, &enemy_attack_01);
+        Sleep(1);
+        combatColision(map01, &vertical, &horizontal, &enemy_vertical_02, &enemy_horizontal_02, &health, &enemy_health_02, &attack, &enemy_attack_02);
+        Sleep(1);
+        combatColision(map01, &vertical, &horizontal, &enemy_vertical_03, &enemy_horizontal_03, &health, &enemy_health_03, &attack, &enemy_attack_03);
+        Sleep(1);
+        combatColision(map01, &vertical, &horizontal, &enemy_vertical_04, &enemy_horizontal_04, &health, &enemy_health_04, &attack, &enemy_attack_04);
+        Sleep(1);
+        combatColision(map01, &vertical, &horizontal, &enemy_vertical_05, &enemy_horizontal_05, &health, &enemy_health_05, &attack, &enemy_attack_05);
+        Sleep(1);
+        combatColision(map01, &vertical, &horizontal, &enemy_vertical_06, &enemy_horizontal_06, &health, &enemy_health_06, &attack, &enemy_attack_06);
+        Sleep(1);
+
+        Sleep(20);
 
     } while (1);
 }
