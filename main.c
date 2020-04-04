@@ -24,6 +24,7 @@ void instructions (void)
 
 int main (void)
 {
+    SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY | BACKGROUND_BLUE | BACKGROUND_RED);
     do
     {
         clear_s();
@@ -66,7 +67,7 @@ int main (void)
             case KB_ENTER :      // All the #define are located inside define.h
             {
                 clear_s();
-                mapCreate();
+                mapCreate01();
             }
 
             case KB_ESC :
