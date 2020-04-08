@@ -17,7 +17,7 @@
 #define WEAPON 159
 #define POTION 155
 #define KEY 191
-#define STAIRS 220
+#define LORE 220
 #define BARRIER 35
 #define LEVER_ON 92
 #define LEVER_OFF 47
@@ -26,6 +26,7 @@
 #define FLOOR 176
 #define V_DOOR 186
 #define H_DOOR 205
+#define EXIT 177
 
 /*
 Y = LINES

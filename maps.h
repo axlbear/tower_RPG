@@ -1,3 +1,202 @@
+void mapCreate02 (int *p, int *k)
+{
+    // Empty Map
+    int tower_level = 2;
+
+    int map02[20][61] = {{219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,},
+		     {219,178,178,219,219,219,219,219,219,219,219,219,219,219,219,219,178,178,178,178,178,219,178,178,178,178,219,178,178,178,178,178,178,178,178,178,178,178,178,178,178,178,178,219,178,178,178,219,178,178,178,178,178,178,178,178,178,178,178,178,219,},
+		     {219,176,176,219,219,219,219,219,219,219,219,219,219,219,219,219,176,176,176,176,176,219,176,176,176,176,219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,178,176,176,176,176,176,176,176,176,176,176,176,176,219,},
+		     {219,176,176,178,178,178,178,178,178,178,178,178,178,178,178,219,219,219,219,219,219,219,176,176,176,176,178,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,219,},
+		     {219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,178,178,178,178,178,219,176,176,176,176,176,176,176,219,176,176,176,176,176,176,176,176,176,176,219,176,176,219,176,176,176,219,176,176,176,176,176,176,176,176,219,176,176,176,219,},
+		     {219,176,176,219,176,176,219,176,176,219,176,176,219,176,176,219,176,176,176,176,176,219,219,219,219,219,219,176,176,178,176,176,176,176,176,176,176,176,176,176,178,176,176,219,176,176,176,219,176,176,176,176,176,176,176,176,219,176,176,176,219,},
+		     {219,176,176,178,176,176,178,176,176,178,176,176,178,176,176,178,176,176,176,176,176,219,178,178,178,178,219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,219,219,219,219,219,219,219,219,219,219,176,176,176,219,},
+		     {219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,176,219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,178,178,178,178,178,178,178,178,178,219,176,176,176,219,},
+		     {219,176,176,219,176,176,219,176,176,219,176,176,219,176,176,219,176,176,176,176,176,219,176,176,176,176,219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,219,},
+		     {219,176,176,178,176,176,178,176,176,178,176,176,178,176,176,219,176,176,176,176,176,219,176,176,176,176,219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,219,},
+		     {219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,176,176,219,176,176,176,176,219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,219,219,176,219,219,219,219,219,219,219,219,219,219,176,176,176,219,},
+		     {219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,176,176,219,176,176,176,176,219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,178,178,176,178,178,178,178,178,178,178,178,178,219,176,176,176,219,},
+		     {219,178,178,178,178,178,178,178,178,178,178,178,178,178,178,178,178,178,178,176,176,219,176,176,176,176,219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,219,},
+		     {219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,176,219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,219,},
+		     {219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,176,178,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,219,219,219,219,219,219,219,219,219,176,176,176,219,176,176,176,219,},
+		     {219,176,176,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,178,178,178,178,178,178,178,178,178,176,176,176,219,176,176,176,219,},
+		     {219,176,176,178,178,178,178,178,178,178,178,178,178,178,178,178,178,178,178,178,178,178,176,176,176,176,219,176,176,219,176,176,176,219,219,176,219,219,176,176,219,176,176,178,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,219,},
+		     {219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,178,176,176,176,219,178,176,178,219,176,176,178,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,219,},
+		     {219,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,176,219,176,176,176,176,176,176,219,176,176,176,219,176,176,176,176,176,219,176,176,176,176,176,176,176,176,176,176,176,176,219,176,176,176,219,},
+		     {219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,}};
+
+    map02[2][44] = KEY;
+    map02[18][35] = KEY;
+    map02[7][22] = KEY;
+    map02[7][55] = LEVER_ON;
+    map02[17][36] = LEVER_ON;
+    map02[1][27] = LEVER_ON;
+    map02[1][23] = LEVER_ON;
+    map02[6][25] = LEVER_ON;
+    map02[9][44] = POTION;
+    map02[18][27] = POTION;
+    map02[17][43] = V_DOOR;
+    map02[17][21] = V_DOOR;
+    map02[4][26] = V_DOOR;
+    map02[10][46] = BARRIER;
+    map02[16][35] = BARRIER;
+    map02[15][26] = BARRIER;
+    map02[7][15] = BARRIER;
+    map02[2][16] = WEAPON;
+    //map02[7][14] = NPC;
+    //map02[3][51] = ENEMY;
+    //map02[17][53] = ENEMY;
+    //map02[6][40] = ENEMY;
+    //map02[3][35] = ENEMY;
+    //map02[17][40] = ENEMY;
+    //map02[12][35] = ENEMY;
+    //map02[9][34] = ENEMY;
+    //map02[6][29] = ENEMY;
+    //map02[15][29] = ENEMY;
+    //map02[12][24] = ENEMY;
+    //map02[5][18] = ENEMY;
+
+    // Player's initial position
+    int vert = 17, horz = 58;
+    // Player's inventory
+    int keys = 0 + *k, potions = 0 + *p;
+    // Enemies' initial position
+    int enemy_vert_01 = 3, enemy_horz_01 = 51;
+    int enemy_vert_02 = 17, enemy_horz_02 = 53;
+    int enemy_vert_03 = 6, enemy_horz_03 = 40;
+    int enemy_vert_04 = 3, enemy_horz_04 = 35;
+    int enemy_vert_05 = 17, enemy_horz_05 = 40;
+    int enemy_vert_06 = 12, enemy_horz_06 = 35;
+    int enemy_vert_07 = 9, enemy_horz_07 = 34;
+    int enemy_vert_08 = 6, enemy_horz_08 = 29;
+    int enemy_vert_09 = 15, enemy_horz_09 = 29;
+    int enemy_vert_10 = 12, enemy_horz_10 = 24;
+    int enemy_vert_11 = 5, enemy_horz_11 = 18;
+
+    int enemy_alive_01 = 1;
+    int enemy_alive_02 = 1;
+    int enemy_alive_03 = 1;
+    int enemy_alive_04 = 1;
+    int enemy_alive_05 = 1;
+    int enemy_alive_06 = 1;
+    int enemy_alive_07 = 1;
+    int enemy_alive_08 = 1;
+    int enemy_alive_09 = 1;
+    int enemy_alive_10 = 1;
+    int enemy_alive_11 = 1;
+
+    do
+    {
+        //Clear the Window
+        refresh();
+        //Set Player and Enemies Positions
+        map02[vert][horz] = PLAYER;
+        Sleep(0.2);
+        if (enemy_alive_01 == 1) map02[enemy_vert_01][enemy_horz_01] = ENEMY;
+        else map02[enemy_vert_01][enemy_horz_01] = WALL;
+        Sleep(0.2);
+        if (enemy_alive_02 == 1) map02[enemy_vert_02][enemy_horz_02] = ENEMY;
+        else map02[enemy_vert_02][enemy_horz_02] = WALL;
+        Sleep(0.2);
+        if (enemy_alive_03 == 1) map02[enemy_vert_03][enemy_horz_03] = ENEMY;
+        else map02[enemy_vert_03][enemy_horz_03] = WALL;
+        Sleep(0.2);
+        if (enemy_alive_04 == 1) map02[enemy_vert_04][enemy_horz_04] = ENEMY;
+        else map02[enemy_vert_04][enemy_horz_04] = WALL;
+        Sleep(0.2);
+        if (enemy_alive_05 == 1) map02[enemy_vert_05][enemy_horz_05] = ENEMY;
+        else map02[enemy_vert_05][enemy_horz_05] = WALL;
+        Sleep(0.2);
+        if (enemy_alive_06 == 1) map02[enemy_vert_06][enemy_horz_06] = ENEMY;
+        else map02[enemy_vert_06][enemy_horz_06] = WALL;
+        Sleep(0.2);
+        if (enemy_alive_07 == 1) map02[enemy_vert_07][enemy_horz_07] = ENEMY;
+        else map02[enemy_vert_07][enemy_horz_07] = WALL;
+        Sleep(0.2);
+        if (enemy_alive_08 == 1) map02[enemy_vert_08][enemy_horz_08] = ENEMY;
+        else map02[enemy_vert_08][enemy_horz_08] = WALL;
+        Sleep(0.2);
+        if (enemy_alive_09 == 1) map02[enemy_vert_09][enemy_horz_09] = ENEMY;
+        else map02[enemy_vert_09][enemy_horz_09] = WALL;
+        Sleep(0.2);
+        if (enemy_alive_10 == 1) map02[enemy_vert_10][enemy_horz_10] = ENEMY;
+        else map02[enemy_vert_10][enemy_horz_10] = WALL;
+        Sleep(0.2);
+        if (enemy_alive_11 == 1) map02[enemy_vert_11][enemy_horz_11] = ENEMY;
+        else map02[enemy_vert_11][enemy_horz_11] = WALL;
+        Sleep(0.2);
+        // Print Map
+        printMap(map02);
+        //MENU
+        printf("| KEYS = %d\n| POTIONS = %d\n| Use SPACE BAR to Interact.\n", keys, potions);
+        // Check Colision for Combat
+        checkColisionCombat(map02, &enemy_vert_01, &enemy_horz_01, &enemy_alive_01);
+        Sleep(0.2);
+        checkColisionCombat(map02, &enemy_vert_02, &enemy_horz_02, &enemy_alive_02);
+        Sleep(0.2);
+        checkColisionCombat(map02, &enemy_vert_03, &enemy_horz_03, &enemy_alive_03);
+        Sleep(0.2);
+        checkColisionCombat(map02, &enemy_vert_04, &enemy_horz_04, &enemy_alive_04);
+        Sleep(0.2);
+        checkColisionCombat(map02, &enemy_vert_05, &enemy_horz_05, &enemy_alive_05);
+        Sleep(0.2);
+        checkColisionCombat(map02, &enemy_vert_06, &enemy_horz_06, &enemy_alive_06);
+        Sleep(0.2);
+        checkColisionCombat(map02, &enemy_vert_07, &enemy_horz_07, &enemy_alive_07);
+        Sleep(0.2);
+        checkColisionCombat(map02, &enemy_vert_08, &enemy_horz_08, &enemy_alive_08);
+        Sleep(0.2);
+        checkColisionCombat(map02, &enemy_vert_09, &enemy_horz_09, &enemy_alive_09);
+        Sleep(0.2);
+        checkColisionCombat(map02, &enemy_vert_10, &enemy_horz_10, &enemy_alive_10);
+        Sleep(0.2);
+        checkColisionCombat(map02, &enemy_vert_11, &enemy_horz_11, &enemy_alive_11);
+        Sleep(0.2);
+        // Get Player Input
+        int KB_INPUT = _getch();
+        // Move Player
+        playerMovement(map02, &vert, &horz, &KB_INPUT);        
+        Sleep(0.2);
+        // Action
+        if (KB_INPUT == KB_SPC)
+        {
+            collectKey(map02, &vert, &horz, &keys);
+            Sleep(0.2);
+            openDoor(map02, &vert, &horz, &keys);
+            Sleep(0.2);
+            pull_Lever(map02, &vert, &horz, &tower_level);
+            Sleep(0.2);
+            grabPotion(map02, &vert, &horz, &potions);
+            Sleep(0.2);
+        }
+
+        // Move Enemies
+        enemyMovement(map02, &enemy_vert_01, &enemy_horz_01, &enemy_alive_01);
+        Sleep(0.2);
+        enemyMovement(map02, &enemy_vert_02, &enemy_horz_02, &enemy_alive_02);
+        Sleep(0.2);
+        enemyMovement(map02, &enemy_vert_03, &enemy_horz_03, &enemy_alive_03);
+        Sleep(0.2);
+        enemyMovement(map02, &enemy_vert_04, &enemy_horz_04, &enemy_alive_04);
+        Sleep(0.2);
+        enemyMovement(map02, &enemy_vert_05, &enemy_horz_05, &enemy_alive_05);
+        Sleep(0.2);
+        enemyMovement(map02, &enemy_vert_06, &enemy_horz_06, &enemy_alive_06);
+        Sleep(0.2);
+        enemyMovement(map02, &enemy_vert_07, &enemy_horz_07, &enemy_alive_07);
+        Sleep(0.2);
+        enemyMovement(map02, &enemy_vert_08, &enemy_horz_08, &enemy_alive_08);
+        Sleep(0.2);
+        enemyMovement(map02, &enemy_vert_09, &enemy_horz_09, &enemy_alive_09);
+        Sleep(0.2);
+        enemyMovement(map02, &enemy_vert_10, &enemy_horz_10, &enemy_alive_10);
+        Sleep(0.2);
+        enemyMovement(map02, &enemy_vert_11, &enemy_horz_11, &enemy_alive_11);
+        Sleep(0.2);
+
+    } while (1);
+    
+}
+
 void mapCreate01 (void)
 {
     // Empty Map
@@ -52,11 +251,9 @@ void mapCreate01 (void)
     //map01[17][34] = ENEMY;
     //map01[7][47] = ENEMY;
     //map01[11][54] = ENEMY;
-    map01[8][2] = STAIRS;
-    map01[0][50] = STAIRS;
-    map01[0][51] = STAIRS;
-    map01[1][50] = STAIRS;
-    map01[1][51] = STAIRS;
+    map01[8][2] = LORE;
+    map01[1][50] = EXIT;
+    map01[1][51] = EXIT;
 
     // Player's initial position
     int vert = 17, horz = 2;
@@ -135,6 +332,10 @@ void mapCreate01 (void)
             Sleep(0.2);
             grabPotion(map01, &vert, &horz, &potions);
             Sleep(0.2);
+            if (map01[vert - 1][horz] == EXIT)
+            {
+                mapCreate02(&potions, &keys);
+            }
         }
 
         // Move Enemies
