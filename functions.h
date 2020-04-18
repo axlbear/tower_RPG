@@ -12,9 +12,13 @@
 #define KB_4 52
 #define KB_5 53
 
+#define DOTS 46
 #define PLAYER 64
-#define ENEMY 69
+#define GOBLIN 71
+#define SKELETON 75
+#define SLIME 83
 #define WEAPON 159
+#define ARMOUR 203
 #define POTION 155
 #define KEY 191
 #define LORE 220
@@ -44,20 +48,13 @@ X = COLUMNS
 
 void refresh (void) // DONE
 {
-    HANDLE hOut;
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     COORD Position;
-
-    hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
     Position.X = 0;
     Position.Y = 0;
 
     SetConsoleCursorPosition(hOut, Position);
-}
-
-void clear_s (void) // DONE
-{
-    system("@cls || clear");
 }
 
 void printLogo (int a[14][61]) // DONE
@@ -74,12 +71,11 @@ void printLogo (int a[14][61]) // DONE
 
 void credits (void) // NEEDS MORE INFORMATION
 {
-    clear_s();
+    refresh();
     printf("| Use W, A, S, D to move.\n");
     printf("| Use the Space Bar to interact with NPCs, Objects, Doors and Levers.\n");
     printf("| Use TAB to see your Inventory.\n");
     _getch();
-    clear_s();
 }
 
 void printMap (int a[20][61]) // DONE
@@ -285,6 +281,116 @@ void grabPotion (int a[20][61], int *y, int *x, int *p) // DONE
     }    
 }
 
+void drinkPotion(int a[20][61], int *y, int *x, int *p, int *hp)
+{
+    if (*p > 0)
+    {
+        refresh();
+        printf("You have drank a potion. +5 Health");
+        *hp += 5;
+        *p -= 1;
+        _getch();
+    }
+
+    else
+    {
+        refresh();
+        printf("You don't have potions to drink.");
+        _getch();
+    }    
+}
+
+void readLore (int a[20][61], int *y, int *x, int *t_l)
+{
+    if (a[*y - 1][*x] == LORE || a[*y][*x + 1] == LORE || a[*y + 1][*x] == LORE || a[*y][*x - 1] == LORE)
+    {
+        if (*t_l == 1)
+        {
+            refresh();
+            printf("You have found a page from the Lich's Diary.");
+            _getch();
+        }
+    }
+}
+
+void pickWeapon (int a[20][61], int *y, int *x, int *atk)
+{
+    if (a[*y - 1][*x] == WEAPON)
+    {
+        refresh();
+        printf("You have found a better sword. +2 Attack");
+        *atk += 2;
+        a[*y - 1][*x] = FLOOR;
+        _getch();
+    }
+
+    else if (a[*y][*x + 1] == WEAPON)
+    {        
+        refresh();
+        printf("You have found a better sword. +2 Attack");
+        *atk += 2;
+        a[*y][*x + 1] = FLOOR;
+        _getch();
+    }
+
+    else if (a[*y + 1][*x] == WEAPON)
+    {
+        refresh();
+        printf("You have found a better sword. +2 Attack");
+        *atk += 2;
+        a[*y + 1][*x] = FLOOR;
+        _getch();
+    }
+
+    else if (a[*y][*x - 1] == WEAPON)
+    {
+        refresh();
+        printf("You have found a better sword. +2 Attack");
+        *atk += 2;
+        a[*y][*x - 1] = FLOOR;
+        _getch();
+    }
+}
+
+void pickArmour (int a[20][61], int *y, int *x, int *def)
+{
+    if (a[*y - 1][*x] == ARMOUR)
+    {
+        refresh();
+        printf("You have repaired your armour. +2 Defense");
+        *def += 2;
+        a[*y - 1][*x] = FLOOR;
+        _getch();
+    }
+
+    else if (a[*y][*x + 1] == ARMOUR)
+    {
+        refresh();
+        printf("You have repaired your armour. +2 Defense");
+        *def += 2;
+        a[*y][*x + 1] = FLOOR;
+        _getch();
+    }
+
+    else if (a[*y + 1][*x] == ARMOUR)
+    {
+        refresh();
+        printf("You have repaired your armour. +2 Defense");
+        *def += 2;
+        a[*y + 1][*x] = FLOOR;
+        _getch();
+    }
+
+    else if (a[*y][*x - 1] == ARMOUR)
+    {
+        refresh();
+        printf("You have repaired your armour. +2 Defense");
+        *def += 2;
+        a[*y][*x - 1] = FLOOR;
+        _getch();
+    }
+}
+
 void playerMovement (int a[20][61], int *y, int *x, int *kb) // DONE
 {
     switch(*kb)
@@ -367,9 +473,9 @@ void playerMovement (int a[20][61], int *y, int *x, int *kb) // DONE
     }
 }
 
-void enemyMovement (int a[20][61], int *e_y, int * e_x, int *alive) // DONE
+void enemyMovement (int a[20][61], int *e_y, int * e_x, int *hp) // DONE
 {
-    if (*alive == 1)
+    if (*hp > 0)
     {
         switch(rand() % 4)
         {
@@ -380,18 +486,6 @@ void enemyMovement (int a[20][61], int *e_y, int * e_x, int *alive) // DONE
                     a[*e_y][*e_x] = FLOOR;
                     *e_y -= 1;
                     break;
-                }
-
-                else if (a[*e_y - 1][*e_x] == PLAYER)
-                {
-                    refresh();
-                    printf("The enemy has seen you. Prepare for Combat!");
-                    // Combat Function
-                    a[*e_y][*e_x] = FLOOR;
-                    *alive = 0;
-                    *e_y = 0;
-                    *e_x = 0;
-                    _getch();
                 }
 
                 else
@@ -409,18 +503,6 @@ void enemyMovement (int a[20][61], int *e_y, int * e_x, int *alive) // DONE
                     break;
                 }
 
-                else if (a[*e_y][*e_x + 1] == PLAYER)
-                {
-                    refresh();
-                    printf("The enemy has seen you. Prepare for Combat!");
-                    // Combat Function
-                    a[*e_y][*e_x] = FLOOR;
-                    *alive = 0;
-                    *e_y = 0;
-                    *e_x = 0;
-                    _getch();
-                }
-
                 else
                 {
                     break;
@@ -434,18 +516,6 @@ void enemyMovement (int a[20][61], int *e_y, int * e_x, int *alive) // DONE
                     a[*e_y][*e_x] = FLOOR;
                     *e_y += 1;
                     break;
-                }
-
-                else if (a[*e_y + 1][*e_x] == PLAYER)
-                {
-                    refresh();
-                    printf("The enemy has seen you. Prepare for Combat!");
-                    // Combat Function
-                    a[*e_y][*e_x] = FLOOR;
-                    *alive = 0;
-                    *e_y = 0;
-                    *e_x = 0;
-                    _getch();
                 }
 
                 else
@@ -463,18 +533,6 @@ void enemyMovement (int a[20][61], int *e_y, int * e_x, int *alive) // DONE
                     break;
                 }
 
-                else if (a[*e_y][*e_x - 1] == PLAYER)
-                {
-                    refresh();
-                    printf("The enemy has seen you. Prepare for Combat!");
-                    // Combat Function
-                    a[*e_y][*e_x] = FLOOR;
-                    *alive = 0;
-                    *e_y = 0;
-                    *e_x = 0;
-                    _getch();
-                }
-
                 else
                 {
                     break;
@@ -490,7 +548,7 @@ void enemyMovement (int a[20][61], int *e_y, int * e_x, int *alive) // DONE
     }
 }
 
-void checkColisionCombat (int a[20][61], int *e_y, int *e_x, int *alive) // DONE
+void checkColisionCombat (int a[20][61], int *e_y, int *e_x, int *p_atk, int *p_def, int *e_atk, int *hp, int *e_hp) // DONE
 {
     if (a[*e_y - 1][*e_x] == PLAYER ||
         a[*e_y - 1][*e_x + 1] == PLAYER ||
@@ -502,16 +560,33 @@ void checkColisionCombat (int a[20][61], int *e_y, int *e_x, int *alive) // DONE
         a[*e_y - 1][*e_x - 1] == PLAYER ||
         a[*e_y][*e_x] == PLAYER)
     {
-        refresh();
-        printf("The enemy has seen you. Prepare for Combat!");
-        // COMBAT FUNCTION
-        a[*e_y][*e_x] = FLOOR;
-        *alive = 0;
-        *e_y = 0;
-        *e_x = 0;  
-        _getch();      
+        *e_hp -= *p_atk;
+
+        if (*e_hp > 0)
+        {
+            *hp -= (*e_atk - *p_def);
+
+            if (*hp < 0)
+            {
+                refresh();
+                printf("You have died.\n");
+                _getch();
+            }
+
+            else 
+            {
+                ;
+            }
+        }
+
+        else
+        {            
+            refresh();
+            printf("You have killed the enemy!\n");
+            a[*e_y][*e_x] = FLOOR;
+            *e_y = 0;
+            *e_x = 0;
+            _getch();
+        }
     }
 }
-
-
-
